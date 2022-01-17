@@ -1,0 +1,1002 @@
+{
+	"info": {
+		"_postman_id": "95b427ca-8e2f-4555-8b55-8ba981ba0853",
+		"name": "Trello",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Trello smoke test",
+			"item": [
+				{
+					"name": "Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"var boardId = response.id;\r",
+									"\r",
+									"pm.environment.set(\"boardId\", boardId);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate board name\", function () {\r",
+									"    pm.expect(response.name).to.eql(\"AMEL RESTAPI\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate board description\", function () {\r",
+									"    pm.expect(response.desc).to.eql(\"text\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/boards?name=AMEL RESTAPI&desc=text",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"boards"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "AMEL RESTAPI"
+								},
+								{
+									"key": "desc",
+									"value": "text"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Board",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate board name\", function () {\r",
+									"    pm.expect(response.name).to.eql(\"AMEL RESTAPI\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate board id\", function () {\r",
+									"    pm.expect(response.id).to.eql(pm.environment.get(\"boardId\"))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate board description\", function () {\r",
+									"    pm.expect(response.desc).to.eql(\"text\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/boards/{{boardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardId}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"var listId = response.id;\r",
+									"\r",
+									"pm.environment.set(\"listId\", listId);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate list name\", function () {\r",
+									"    pm.expect(response.name).to.eql(\"Backlog\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/lists?name=Backlog&idBoard={{boardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Backlog"
+								},
+								{
+									"key": "idBoard",
+									"value": "{{boardId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Backlog list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate list name\", function () {\r",
+									"    pm.expect(response.name).to.eql(\"Backlog\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate list id\", function () {\r",
+									"    pm.expect(response.id).to.eql(pm.environment.get(\"listId\"))\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/lists/{{listId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"lists",
+								"{{listId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"var cardId = response.id;\r",
+									"\r",
+									"pm.environment.set(\"cardId\", cardId);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate card name\", function () {\r",
+									"    pm.expect(response.name).to.eql(\"New card\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate card description\", function () {\r",
+									"    pm.expect(response.desc).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/cards?name=New card&idList={{listId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"cards"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "New card"
+								},
+								{
+									"key": "idList",
+									"value": "{{listId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate card name\", function () {\r",
+									"    pm.expect(response.name).to.eql(\"New card\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate card description\", function () {\r",
+									"    pm.expect(response.desc).to.eql(\"\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate card id\", function () {\r",
+									"    pm.expect(response.id).to.eql(pm.environment.get(\"cardId\"))\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/cards/{{cardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"cards",
+								"{{cardId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invite",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"const members = response.members.filter(item => item.fullName === \"amelopankovic\")\r",
+									"\r",
+									"pm.collectionVariables.set(\"newMemberId\", members[0].id);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"for (let i = 0; i < response.members.length; i++){\r",
+									"    pm.test(\"Validate new member name\", () => {\r",
+									"    pm.expect(response.members[i].fullName).to.oneOf([\"Amel Opankovic\", \"amelopankovic\"])\r",
+									"});}\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/boards/{{boardId}}/members?email=amelopankovic@hotmail.com&type=normal",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardId}}",
+								"members"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "amelopankovic@hotmail.com"
+								},
+								{
+									"key": "type",
+									"value": "normal"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Member",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate new member id\", function () {\r",
+									"    pm.expect(response.id).to.eql(pm.collectionVariables.get(\"newMemberId\"))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate new member name\", function () {\r",
+									"    pm.expect(response.fullName).to.eql(\"amelopankovic\")\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/members/{{newMemberId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"members",
+								"{{newMemberId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a member to card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate new member id\", function () {\r",
+									"    pm.expect(response[0].id).to.eql(pm.collectionVariables.get(\"newMemberId\"))\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/cards/{{cardId}}/idMembers?value={{newMemberId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"cards",
+								"{{cardId}}",
+								"idMembers"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "{{newMemberId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All lists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"\r",
+									"const toDo = response.filter(m => m.name === \"To Do\")\r",
+									"pm.collectionVariables.set(\"listToDoId\", toDo[0].id);\r",
+									"\r",
+									"const backlog = response.filter(m => m.name === \"Backlog\")\r",
+									"pm.collectionVariables.set(\"listBacklogId\", backlog[0].id);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate list name\", function () {\r",
+									"    pm.expect(toDo[0].name).to.eql(\"To Do\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate list name\", function () {\r",
+									"    pm.expect(backlog[0].name).to.eql(\"Backlog\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/boards/{{boardId}}/lists",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardId}}",
+								"lists"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json()\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate card name\", function () {\r",
+									"    pm.expect(response.name).to.eql(\"New card\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate list id\", function () {\r",
+									"    pm.expect(response.idList).to.eql(pm.collectionVariables.get(\"listToDoId\"))\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/1/cards/{{cardId}}/idList?value={{listToDoId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"cards",
+								"{{cardId}}",
+								"idList"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "{{listToDoId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment with new member",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate comment text\", function () {\r",
+									"    pm.expect(response.data.text).to.eql(\"This is comment\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauthNewMember}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/cards/{{cardId}}/actions/comments?text=This is comment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"cards",
+								"{{cardId}}",
+								"actions",
+								"comments"
+							],
+							"query": [
+								{
+									"key": "text",
+									"value": "This is comment"
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move card with new member",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json()\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate card name\", function () {\r",
+									"    pm.expect(response.name).to.eql(\"New card\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate list id\", function () {\r",
+									"    pm.expect(response.idList).to.eql(pm.collectionVariables.get(\"listBacklogId\"))\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauthNewMember}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/1/cards/{{cardId}}/idList?value={{listBacklogId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"cards",
+								"{{cardId}}",
+								"idList"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "{{listBacklogId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/cards/{{cardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"cards",
+								"{{cardId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Archive backlog list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate list name\", function () {\r",
+									"    pm.expect(response.name).to.eql(\"Backlog\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate list id\", function () {\r",
+									"    pm.expect(response.id).to.eql(pm.environment.get(\"listId\"))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate that the list is archived\", function () {\r",
+									"    pm.expect(response.closed).to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/lists/{{listId}}/closed?value=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"lists",
+								"{{listId}}",
+								"closed"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Board",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{oauth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/1/boards/{{boardId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "oauth",
+			"value": "OAuth oauth_consumer_key=\"\", oauth_token=\"\""
+		},
+		{
+			"key": "listToDoId",
+			"value": ""
+		},
+		{
+			"key": "newMemberId",
+			"value": ""
+		},
+		{
+			"key": "oauthNewMember",
+			"value": "OAuth oauth_consumer_key=\"\", oauth_token=\"\""
+		},
+		{
+			"key": "listBacklogId",
+			"value": ""
+		}
+	]
+}
