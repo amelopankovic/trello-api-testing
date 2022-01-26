@@ -20,4 +20,4 @@ If you have npm installed, run this command in your command-line interface (CLI)
 
 After installing Newman, navigate to trello-api-testing folder in CLI and run smoke test: `newman run Trello_collection.json -e Trello_environment.json`.
 
-![gif](Newman run.gif)
+![gif](https://github.com/amelopankovic/trello-api-testing/blob/main/Newman%20run.gif)
