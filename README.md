@@ -19,3 +19,5 @@ This is necessary because you have entered your keys and tokens for authorizatio
 If you have npm installed, run this command in your command-line interface (CLI) `npm install -g newman`.
 
 After installing Newman, navigate to trello-api-testing folder in CLI and run smoke test: `newman run Trello_collection.json -e Trello_environment.json`.
+
+![](Newman run.gif)
